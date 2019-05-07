@@ -37,18 +37,18 @@ serve((req, res) => {
   // Note that req.url here should be the full URL path from
   // the original request, including the query string.
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
-    if (error) {
-      res.status(500).send(error.message)
-    } else if (redirectLocation) {
-      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
-    } else if (renderProps) {
-      // You can also check renderProps.components or renderProps.routes for
-      // your "not found" component or route respectively, and send a 404 as
-      // below, if you're using a catch-all route.
-      res.status(200).send(renderToString(<RouterContext {...renderProps} />))
-    } else {
-      res.status(404).send('Not found')
-    }
+  if (error) {
+  res.status(500).send(error.message)
+  } else if (redirectLocation) {
+  res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+  } else if (renderProps) {
+  // You can also check renderProps.components or renderProps.routes for
+  // your "not found" component or route respectively, and send a 404 as
+  // below, if you're using a catch-all route.
+  res.status(200).send(renderToString(<RouterContext {...renderProps} />))
+  } else {
+  res.status(404).send('Not found')
+  }
   })
 })
 ```
@@ -61,27 +61,27 @@ serve((req, res) => {
 
 # 避免 XSS 漏洞
 
-笔者一直是坚定地 React 技术栈的使用者，因此也会关注 React 应用安全相关的话题。笔者在我自己的[React+Redux+Webpack2](https://github.com/wxyyxc1992/Webpack2-React-Redux-Boilerplate)脚手架的第三层级也使用了大量的服务端渲染/同构直出的技术，而本文即是阐述该方法可能存在的某个 XSS 漏洞。服务端渲染即允许我们在服务端进行 HTML 渲染，并且在服务端请求部分应用数据追加到页面上然后随着页面一起返回给用户，从而减少用户的首屏等待时间，并且对于搜索引擎有更友好的优化。
-不过如果有安全背景的朋友肯定已经能够察觉到问题了，直接将数据不经过滤地放到页面上势必会带来潜在的安全问题，譬如我们最常用的[同构页面的代码](https://github.com/wxyyxc1992/Webpack2-React-Redux-Boilerplate/blob/master/dev-config/server/template.js):
+笔者一直是坚定地 React 技术栈的使用者，因此也会关注 React 应用安全相关的话题。笔者在我自己的[React+Redux+Webpack2](https://github.com/wx-chevalier/Webpack2-React-Redux-Boilerplate)脚手架的第三层级也使用了大量的服务端渲染/同构直出的技术，而本文即是阐述该方法可能存在的某个 XSS 漏洞。服务端渲染即允许我们在服务端进行 HTML 渲染，并且在服务端请求部分应用数据追加到页面上然后随着页面一起返回给用户，从而减少用户的首屏等待时间，并且对于搜索引擎有更友好的优化。
+不过如果有安全背景的朋友肯定已经能够察觉到问题了，直接将数据不经过滤地放到页面上势必会带来潜在的安全问题，譬如我们最常用的[同构页面的代码](https://github.com/wx-chevalier/Webpack2-React-Redux-Boilerplate/blob/master/dev-config/server/template.js):
 
 ```
 export default (html, initialState = {}, scripts = [], styles = []) => {
   return `
-    <!doctype html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-        ${styleMapper(styles)}
-      </head>
-      <body>
-        <div id="root">${html}</div>        
-      </body>
-      ${scriptMapper(scripts)}
-      <script>
-        window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
-      </script>
-    </html>
+  <!doctype html>
+  <html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  ${styleMapper(styles)}
+  </head>
+  <body>
+  <div id="root">${html}</div>
+  </body>
+  ${scriptMapper(scripts)}
+  <script>
+  window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
+  </script>
+  </html>
   `;
 };
 ```
@@ -91,8 +91,8 @@ export default (html, initialState = {}, scripts = [], styles = []) => {
 ```
 {
   user: {
-    username: "NodeSecurity",
-    bio: "as</script><script>alert('You have an XSS vulnerability!')</script>"
+  username: "NodeSecurity",
+  bio: "as</script><script>alert('You have an XSS vulnerability!')</script>"
   }
 }
 ```

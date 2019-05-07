@@ -8,7 +8,7 @@
 
 ##  避免状态误用
 
-React  组件中的数据流主要由  Props  与  State  构成，我们已经知道  State  可以用于存放组件内部的临时状态。在传统的面向对象编程中，我们习惯在构造函数中将外部传入的构造参数存入类的成员变量中；不过这种设计模式在  React  组件开发中却容易造成反模式。譬如我们要开发  `NameLabel`  组件，其允许外部传入  `firstName`  与  `lastName`  两个参数，该组件会将两个参数组合展示：
+React  组件中的数据流主要由 Props  与 State  构成，我们已经知道 State  可以用于存放组件内部的临时状态。在传统的面向对象编程中，我们习惯在构造函数中将外部传入的构造参数存入类的成员变量中；不过这种设计模式在 React  组件开发中却容易造成反模式。譬如我们要开发`NameLabel`  组件，其允许外部传入`firstName`  与`lastName`  两个参数，该组件会将两个参数组合展示：
 
 ```
 class NameLabel extends Component {
@@ -25,7 +25,7 @@ class NameLabel extends Component {
 }
 ```
 
-该组件存在的问题在于我们将  Props  传入的参数缓存在了  State  中，当父组件修改  Props  参数时并不会触发构造函数，相对应地最终的界面展示也就不会随着外部传入参数的变化而变化。为了修复这个错误我们可以复写组件的  `componentWillReceiveProps`  函数：
+该组件存在的问题在于我们将 Props  传入的参数缓存在了 State  中，当父组件修改 Props  参数时并不会触发构造函数，相对应地最终的界面展示也就不会随着外部传入参数的变化而变化。为了修复这个错误我们可以复写组件的`componentWillReceiveProps`  函数：
 
 ```
 class NameLabel extends Component {
@@ -48,7 +48,7 @@ class NameLabel extends Component {
 }
 ```
 
-通过复写  `componentWillReceiveProps`  函数我们能够正确响应外部  Props  的变化，不过这种方式还是显得有所冗余，我们没有必要将  Props  中的数据缓存到  State  中。我们可以在  `render`  函数中直接读取  Props  中传入的参数然后显示：
+通过复写`componentWillReceiveProps`  函数我们能够正确响应外部 Props  的变化，不过这种方式还是显得有所冗余，我们没有必要将 Props  中的数据缓存到 State  中。我们可以在`render`  函数中直接读取 Props  中传入的参数然后显示：
 
 ```
 class NameLabel extends Component {
@@ -70,7 +70,7 @@ function NameLabel({ firstName, lastName }) {
 ```
 
 ##  外部操作组件状态
-React  中我们需要避免直接操作  DOM  节点或者访问全局变量，不过某些情况下我们需要在组件外触发组件内部状态更新，可以通过构建挂载于全局变量下的闭包来达成：
+React  中我们需要避免直接操作 DOM  节点或者访问全局变量，不过某些情况下我们需要在组件外触发组件内部状态更新，可以通过构建挂载于全局变量下的闭包来达成：
 
 ```
 componentWillMount(){
@@ -256,7 +256,7 @@ updateState(event) {
 }
 ```
 
-通过 `Object.assign` 我们创建了原本 `user` 对象的数据拷贝，这样我们直接操作新对象的属性然后调用 `setState` 函数就能够正确地触发界面重渲染了。不过我们需要注意的是  `Object.assign` 只是一层浅复制，在某些情况下有可能会造成数据的异常改变；另外 IE 中并不支持 `Object.assign`，如果我们的部署环境包括 IE 那么需要引入 [object-assign](https://www.npmjs.com/package/object-assign)  这样的垫片。除了 `Object.assign`，我们还可以使用对象的扩展操作符来创建新的对象：
+通过 `Object.assign` 我们创建了原本 `user` 对象的数据拷贝，这样我们直接操作新对象的属性然后调用 `setState` 函数就能够正确地触发界面重渲染了。不过我们需要注意的是`Object.assign` 只是一层浅复制，在某些情况下有可能会造成数据的异常改变；另外 IE 中并不支持 `Object.assign`，如果我们的部署环境包括 IE 那么需要引入 [object-assign](https://www.npmjs.com/package/object-assign)  这样的垫片。除了 `Object.assign`，我们还可以使用对象的扩展操作符来创建新的对象：
 
 ```
 updateState(event) {
@@ -308,13 +308,13 @@ newData.a.b.push(9);
 ```
 const newData = extend(myData, {
   x: extend(myData.x, {
-    y: extend(myData.x.y, {z: 7}),
+  y: extend(myData.x.y, {z: 7}),
   }),
   a: extend(myData.a, {b: myData.a.b.concat(9)})
 });
 ```
 
-这种方式的性能损耗也较大，而  immutability-helper 正是提供了用于简化数据修改的语法糖，从而使得对象修改变得更为容易：
+这种方式的性能损耗也较大，而 immutability-helper 正是提供了用于简化数据修改的语法糖，从而使得对象修改变得更为容易：
 
 ```
 import update from 'immutability-helper';

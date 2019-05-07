@@ -63,7 +63,7 @@ $ npm run build
 
 # 项目结构
 
-该部分的代码参考[vue-boilerplate](https://github.com/wxyyxc1992/Web-Frontend-Introduction-And-Engineering-Practices/tree/master/OpenSource/vue-boilerplate)。首先我们来看下 Vue-cli 构建的项目目录结构：
+该部分的代码参考[vue-boilerplate](https://github.com/wx-chevalier/Web-Frontend-Introduction-And-Engineering-Practices/tree/master/OpenSource/vue-boilerplate)。首先我们来看下 Vue-cli 构建的项目目录结构：
 ![](https://coding.net/u/hoteam/p/Cache/git/raw/master/2017/1/2/1-hvpOnNNjqls-qRbFj7LSMg.png)
 
 进入项目根目录之后我们使用`npm intsall`命令安装所有依赖，所有的依赖被声明在`package.json`文件中。文件`index.html`中包含了如下 HTML 代码：
@@ -72,12 +72,12 @@ $ npm run build
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>vueapp01</title>
+  <meta charset="utf-8">
+  <title>vueapp01</title>
   </head>
   <body>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
   </body>
 </html>
 ```
@@ -110,8 +110,8 @@ new Vue({
 ```
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+  <img src="./assets/logo.png">
+  <hello></hello>
   </div>
 </template>
 <script>
@@ -119,7 +119,7 @@ import Hello from './components/Hello'
 export default {
   name: 'app',
   components: {
-    Hello
+  Hello
   }
 }
 </script>
@@ -199,21 +199,21 @@ export default {
 ```
 
 users: [
-        {firstname: 'Sebastian', lastname: 'Eschweiler'},
-        {firstname: 'Bill', lastname: 'Smith'},
-        {firstname: 'John', lastname: 'Porter'}
-      ],
+  {firstname: 'Sebastian', lastname: 'Eschweiler'},
+  {firstname: 'Bill', lastname: 'Smith'},
+  {firstname: 'John', lastname: 'Porter'}
+  ],
 
 ```
 然后使用`v-for`指令遍历该列表并且提取出每个元素的`firstname`与`lastname`值：
 ```
 
 <div>
-      <ul>
-        <li v-for="user in users">
-          {{user.firstname}} {{user.lastname}}
-        </li>
-      </ul>
+  <ul>
+  <li v-for="user in users">
+  {{user.firstname}} {{user.lastname}}
+  </li>
+  </ul>
 </div>
 ```
 
@@ -229,7 +229,7 @@ input_val: ''
 
 ```
 <div>
-      <input type="text" v-model="input_val">
+  <input type="text" v-model="input_val">
 </div>
 ```
 
@@ -253,42 +253,42 @@ Input Value: <span v-text="input_val"></span>
 ```
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <hr />
-    <div>
-      <ul>
-        <li v-for="user in users">
-          {{user.firstname}} {{user.lastname}}
-        </li>
-      </ul>
-    </div>
-    <hr />
-    <div>
-      <input type="text" v-model="input_val">
-    </div>
-    <div>
-      Input Value: <span v-text="input_val"></span>
-    </div>
-    <hr />
-    <div>
-      <button class="btn btn-primary" v-on:click="counter++">You've clicked this button {{counter}} times!</button>
-    </div>
+  <h1>{{ msg }}</h1>
+  <hr />
+  <div>
+  <ul>
+  <li v-for="user in users">
+  {{user.firstname}} {{user.lastname}}
+  </li>
+  </ul>
+  </div>
+  <hr />
+  <div>
+  <input type="text" v-model="input_val">
+  </div>
+  <div>
+  Input Value: <span v-text="input_val"></span>
+  </div>
+  <hr />
+  <div>
+  <button class="btn btn-primary" v-on:click="counter++">You've clicked this button {{counter}} times!</button>
+  </div>
   </div>
 </template>
 <script>
 export default {
   name: 'hello',
   data () {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-      users: [
-        {firstname: 'Sebastian', lastname: 'Eschweiler'},
-        {firstname: 'Bill', lastname: 'Smith'},
-        {firstname: 'John', lastname: 'Porter'}
-      ],
-      input_val: '',
-      counter: 0
-    }
+  return {
+  msg: 'Welcome to Your Vue.js App',
+  users: [
+  {firstname: 'Sebastian', lastname: 'Eschweiler'},
+  {firstname: 'Bill', lastname: 'Smith'},
+  {firstname: 'John', lastname: 'Porter'}
+  ],
+  input_val: '',
+  counter: 0
+  }
   }
 }
 </script>
@@ -298,7 +298,7 @@ h1, h2 {
   font-weight: normal;
 }
 ul {
-    list-style-position: inside;
+  list-style-position: inside;
 }
 a {
   color: #42b983;

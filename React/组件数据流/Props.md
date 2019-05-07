@@ -23,8 +23,8 @@ Component Injection
 ```
 class WindowWidth extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { width: 0 };
+  super(props);
+  this.state = { width: 0 };
   }
 
 
@@ -34,10 +34,10 @@ class WindowWidth extends React.Component {
   render() {
 
 
-      const { width } = this.state;
-      const { Width } = this.props;
-      return <Width width={width} />;
-   }
+  const { width } = this.state;
+    const { Width } = this.props;
+  return <Width width={width} />;
+ }
 }
 
 
@@ -48,11 +48,11 @@ class WindowWidth extends React.Component {
 const DisplayDevice = ({ width }) => {
   let device = null;
   if (width <= 480) {
-    device = 'mobile';
+  device = 'mobile';
   } else if (width <= 768) {
-    device = 'tablet';
+  device = 'tablet';
   } else {
-    device = 'desktop';
+  device = 'desktop';
   }
   return <div>you are using a {device}</div>;
 };
@@ -87,9 +87,9 @@ import React from 'react'
 
 const AnotherComponent = () => (
   <SharedThing>
-    {(thing1, thing2) => (
-      // use thing1 and thing2
-    )}
+  {(thing1, thing2) => (
+  // use thing1 and thing2
+  )}
   </SharedThing>
 )
 
@@ -130,9 +130,7 @@ const Accordion = ({ teaser, details }) => (
   <Toggle>
     {(isOpen, handleToggleClick) => (
       <section>
-        <a onClick={handleToggleClick}>
-          {`${isOpen ? '-' : '+'} ${teaser}`}     
-        </a>
+        <a onClick={handleToggleClick}>{`${isOpen ? '-' : '+'} ${teaser}`} </a>
         {isOpen && details}
       </section>
     )}
@@ -156,7 +154,6 @@ const Thumbnail = ({ src, teaser }) => (
             maxWidth: isOpen ? '100%' : 150
           }}
         />
-         
       </div>
     )}
   </Toggle>
